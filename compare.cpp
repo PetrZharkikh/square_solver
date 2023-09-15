@@ -1,5 +1,9 @@
 #include "main.h"
-#include "compare.h"
+
+#ifndef in_out_put
+    #include "compare.h"
+#endif
+
 
 
 

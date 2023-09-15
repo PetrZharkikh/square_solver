@@ -1,7 +1,7 @@
 #include "main.h"
-#include "in_out_put.h"
-
-
+#ifndef in_out_put
+    #include "in_out_put.h"
+#endif
 
 
 
@@ -13,8 +13,8 @@ int choose_degree(void)
      while (((degree = read_int()) == 0) || ((degree!=2) && (degree!=1)))
             {
             printf("Программа не может решить уравнение данной степени. Повторите ввод:\n");
-            if (degree == 0)
-                clear_buffer();
+            //if (degree == 0)
+                //clear_buffer();
             }
      return degree;
     }
@@ -72,6 +72,7 @@ int read_int(void)
             }
         else
             {
+            clear_buffer();
             return 0;
             }
         }

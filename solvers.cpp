@@ -1,5 +1,8 @@
 #include "main.h"
-#include "solvers.h"
+
+#ifndef in_out_put
+    #include "solvers.h"
+#endif
 
 extern const double EPS=1E-10;
 
