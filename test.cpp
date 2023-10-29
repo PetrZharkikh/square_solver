@@ -8,33 +8,33 @@
 
 enum number_of_roots
     {
-    ZERO_ROOTS=0,
-    ONE_ROOT=1,
-    TWO_ROOTS=2,
-    INF_ROOTS=8
+    ZERO_ROOTS = 0,
+    ONE_ROOT = 1,
+    TWO_ROOTS = 2,
+    INF_ROOTS = 8
     };
 
 enum equation_cases
     {
-    LINEAR_CASE=1,
-    SQUARE_CASE=2
+    LINEAR_CASE = 1,
+    SQUARE_CASE = 2
     };
 
 enum comparing_answers
     {
-    EQUALITY=0,
-    MORE=1,
-    LESS=-1
+    EQUALITY = 0,
+    MORE = 1,
+    LESS = -1
     };
 
 enum tests
     {
-    TEST_NAME=10,
-    NTESTS=6
+    TEST_NAME = 10,
+    NTESTS = 6
     };
 
 
-const double EPS=1E-10;
+const double EPS = 1E-10;
 
 
 struct TestData
@@ -46,12 +46,12 @@ struct TestData
     };
 
 TestData allData[] =
-{{.a=0, .b=0,  .c=0, .x1=NAN,  .x2=NAN, .nRoots=INF_ROOTS,  "INF_ROOTS"},
-{ .a=1, .b=0,  .c=0, .x1=0,    .x2=NAN, .nRoots=ONE_ROOT,   "ONE_ROOT"},
-{ .a=1, .b=2,  .c=3, .x1=NAN,  .x2=NAN, .nRoots=ZERO_ROOTS, "NO_ROOTS"},
-{ .a=0, .b=2,  .c=3, .x1=-1.5, .x2=NAN, .nRoots=ONE_ROOT,   "LINEAR"},
-{ .a=1, .b=-4, .c=3, .x1=3,    .x2=1,   .nRoots=TWO_ROOTS,  "DEF_SQ"},
-{ .a=2, .b=8,  .c=8, .x1=-2,   .x2=NAN, .nRoots=ONE_ROOT,   "D=0"}};
+{{.a = 0, .b =0 ,  .c = 0, .x1 = NAN,  .x2 = NAN, .nRoots = INF_ROOTS,  "INF_ROOTS"},
+{ .a = 1, .b = 0,  .c = 0, .x1 = 0,    .x2 = NAN, .nRoots = ONE_ROOT,   "ONE_ROOT"},
+{ .a = 1, .b = 2,  .c = 3, .x1 = NAN,  .x2 = NAN, .nRoots = ZERO_ROOTS, "NO_ROOTS"},
+{ .a = 0, .b = 2,  .c = 3, .x1 = -1.5, .x2 = NAN, .nRoots = ONE_ROOT,   "LINEAR"},
+{ .a = 1, .b = -4, .c = 3, .x1 = 3,    .x2 = 1,   .nRoots = TWO_ROOTS,  "DEF_SQ"},
+{ .a = 2, .b = 8,  .c = 8, .x1 = -2,   .x2 = NAN, .nRoots = ONE_ROOT,   "D=0"}};
 
 
 int TestOne(TestData data);
@@ -71,7 +71,7 @@ void output(int nRoots, double x1, double x2);
 
 int main(void)
     {
-    for (unsigned int i=0; i < (sizeof(allData) / sizeof(allData[0])); i++)
+    for (unsigned int i = 0; i < (sizeof(allData) / sizeof(allData[0])); i++)
         TestOne(allData[i]);
 
     return 0;
@@ -80,7 +80,7 @@ int main(void)
 
 int TestOne(TestData data)
     {
-    double x1=NAN, x2=NAN;
+    double x1 = NAN, x2 = NAN;
     int nRoots = 0;
 
     nRoots = sq_solve(data.a, data.b, data.c, &x1, &x2);
@@ -105,8 +105,8 @@ int sq_solve(double a, double b, double c, double* x1, double* x2)
     assert(isfinite(b));
     assert(isfinite(c));
 
-    assert(x1!=NULL);
-    assert(x2!=NULL);
+    assert(x1 != NULL);
+    assert(x2 != NULL);
 
     if (comp_d_less(fabs(a), EPS))
         return line_solve(b,c,x1);
@@ -115,7 +115,7 @@ int sq_solve(double a, double b, double c, double* x1, double* x2)
         {
         double discrim=NAN, sqrt_discrim=NAN;
 
-        discrim= b*b - 4*a*c;
+        discrim = b*b - 4*a*c;
 
         if (comp_d_less(discrim, 0))
             {
@@ -123,14 +123,14 @@ int sq_solve(double a, double b, double c, double* x1, double* x2)
             }
         if (comp_d_equal(discrim, 0))
             {
-            *x1=(-b) / (2*a);
+            *x1 = (-b) / (2*a);
             if (comp_d_equal(*x1, 0))
-                *x1=0;
+                *x1 = 0;
             return ONE_ROOT;
             }
         sqrt_discrim=sqrt(discrim);
-        *x1= (-b + sqrt_discrim) / (2*a);
-        *x2= (-b - sqrt_discrim) / (2*a);
+        *x1 = (-b + sqrt_discrim) / (2*a);
+        *x2 = (-b - sqrt_discrim) / (2*a);
         return TWO_ROOTS;
 
         }
